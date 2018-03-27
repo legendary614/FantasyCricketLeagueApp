@@ -1,0 +1,59 @@
+html, body {
+	font-family: "Arial";
+	font-size: 14px;
+	width: 100%;
+	height: 100%;
+	background: #e0e1e3;
+	min-width: 820px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+#page {
+	width: 100%;
+	height: 100%;
+}
+
+hr {
+	border-color: #2a2c30;
+	border-style: dashed;
+}
+
+a {
+	color: #009dd0;
+
+	&:hover {
+		color: #00bce4;
+		text-decoration: none;
+	}
+}
+
+.tab-content {
+	padding: 16px;
+	border: 1px solid #ddd;
+	border-top: 0px;
+	background: #fff;
+	border-radius: 0px 5px 5px 5px;
+}
+
+.page-container {
+	width: 100%;
+	height: calc(100% - 70px);
+	padding: 0 24px;
+	overflow-y: auto;
+}
+
+@mixin display-inline-block {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.alert-success {
+	padding: 8px 16px;
+}
+
+.form-control[disabled] {
+	background: #e0e1e3;
+}

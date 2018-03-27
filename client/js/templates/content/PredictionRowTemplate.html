@@ -1,0 +1,74 @@
+<h4>
+	<b>Your Prediction </b>
+	<span class="prediction-note">(15 Points for correctly predicting Sections 1, 2 and 3)</span>
+</h4>
+<form role="form" class="form row">
+	<input class="hidden" name="matchId" value="<%= defaultEntries.matchId %>" />
+	<input class="hidden" name="userId" value="<%= defaultEntries.userId %>" />
+	<div class="col-sm-6 prediction-rules">
+		<div class="form-group">
+			<label for="rule1Winner">
+				<span>1: <%= defaultEntries.rule1.ruleDesc %></span><br>
+				<% if (defaultEntries.rule1.range != 0) {%> 
+					<span class="prediction-range">(Range: +- <b><%= defaultEntries.rule1.range %></b>)</span>
+				<% } %>
+				<span class="prediction-points"><b>(<%= defaultEntries.rule1.rulePoints %> Points</b>)</span>
+			</label>
+			<div class="rule1Winner"></div>
+		</div>
+	</div>
+	<div class="col-sm-6 prediction-rules">
+		<div class="form-group">
+			<label for="rule2Winner">
+				<span>2: <%= defaultEntries.rule2.ruleDesc %></span><br>
+				<% if (defaultEntries.rule2.range != 0) {%> 
+					<span class="prediction-range">(Range: +- <b><%= defaultEntries.rule2.range %></b>)</span>
+				<% } %>
+				<span class="prediction-points">(<b><%= defaultEntries.rule2.rulePoints %> Points</b>)</span>
+			</label>
+			<input class="form-control" type="number" name="rule2Winner" value="<%= prediction.rule2Winner %>"/>
+		</div>
+	</div>
+	<div class="col-sm-6 prediction-rules">
+		<div class="form-group">
+			<label for="rule3Winner">
+				<span>3: <%= defaultEntries.rule3.ruleDesc %></span><br>
+				<% if (defaultEntries.rule3.range != 0) {%> 
+					<span class="prediction-range">(Range: +- <b><%= defaultEntries.rule3.range %></b>)</span>
+				<% } %>
+				<span class="prediction-points">(<b><%= defaultEntries.rule3.rulePoints %> Points</b>)</span>
+			</label>
+			<div class="rule3Winner"></div>
+		</div>
+	</div>
+	<div class="col-sm-6 prediction-rules">
+		<div class="form-group">
+			<label for="bonusWinner">
+				<span>BONUS: <%= defaultEntries.bonusRule.ruleDesc %></span><br>
+				<% if (defaultEntries.bonusRule.range != 0) {%> 
+					<span class="prediction-range">(Range: +- <b><%= defaultEntries.bonusRule.range %></b>)</span>
+				<% } %>
+				<span class="prediction-points">(<b><%= defaultEntries.bonusRule.rulePoints %> Points</b>)</span>
+			</label>
+
+			<% if ((defaultEntries.bonusRule.ruleType == "playerName") || (defaultEntries.bonusRule.ruleType == "teamName")) { %>
+				<div class="bonusWinner"></div>
+			<% } else { %>
+				<input class="form-control" type="text" name="bonusWinner" value="<%= prediction.bonusWinner %>"/>
+			<% } %>
+		</div>
+	</div>
+</form>
+<div class="row">
+	<button type="button" class="btn btn-primary submit-prediction" style="margin-left: 16px">Submit</button>
+	<span class="success-message alert alert-success">
+		<strong>Success! </strong>You have successfully added your prediction.
+	</span>
+</div>
+<% if (defaultEntries.isComplete) {%>
+<div style="text-align: center;padding: 16px 0;">
+	<span class="alert alert-success">
+		<strong>Results have been updated. Click <a href="#results">Here</a> to view results.</strong>
+	</span>
+</div>
+<% } %>

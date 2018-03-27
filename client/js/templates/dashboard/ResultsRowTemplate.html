@@ -1,0 +1,125 @@
+<hr>
+<div class="row">
+	<div class="col-sm-12">
+		 <h4><b><%= teams_info[match.homeTeam] %></b> vs <b><%= teams_info[match.awayTeam] %></b></h4>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<span><b>Date: </b><%=match.date %>,</span>
+		<span style="margin-left:5px;"><b>Venue: </b><%= match.venue %></span>
+	</div>
+</div>
+<hr>
+<h4>RULES</h4>
+<ul>
+	<li>
+		<b>Rule 1: </b>
+		<span><%= rule1.ruleDesc %></span>
+	</li>
+	<li>
+		<b>Rule 2: </b>
+		<span><%= rule2.ruleDesc %></span>
+		<span class="prediction-range">(Range: +- <b><%= rule2.range %></b>)</span>
+	</li>
+	<li>
+		<b>Rule 3: </b>
+		<span><%= rule3.ruleDesc %></span>
+	</li>
+	<li>
+		<b>Bonus Rule: </b>
+		<span><%= bonusRule.ruleDesc %></span>
+		<% if (bonusRule.range) { %>
+			<span class="prediction-range">(Range: +- <b><%= bonusRule.range %></b>)</span>
+		<% } %>
+	</li>
+</ul>
+<h4>POINTS TABLE</h4>
+<table class="table table-striped results-table">
+	<thead>
+		<tr>
+			<th>Rank</th>
+			<th>Team</th>
+			<th>Name</th>
+			<th>
+				<span>Rule 1</span><br>
+				<span class="prediction-points"><b>(<%= rule1.rulePoints %> Points</b>)</span>
+			</th>
+			<th>
+				<span>Rule 2</span><br>
+				<span class="prediction-points"><b>(<%= rule2.rulePoints %> Points</b>)</span>
+			</th>
+			<th>
+				<span>Rule 3</span><br>
+				<span class="prediction-points"><b>(<%= rule3.rulePoints %> Points</b>)</span>
+			</th>
+			<th>
+				<span>Bonus</span><br>
+				<span class="prediction-points"><b>(<%= bonusRule.rulePoints %> Points</b>)</span>
+			</th>
+			<th>Total Points</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="winning-predictions">
+			<td></td>
+			<td></td>
+			<td>Winning Answers:</td>
+			<td><%= teams_info[match.rule1Winner] %></td>
+			<td><%= match.rule2Winner %></td>
+			<td><%= match.rule3Winner %></td>
+			<td><%= match.bonusWinner %></td>
+			<td></td>
+		</tr>
+		<% if (predictions.length) { %>
+			<% _.each(predictions, function(prediction, index) { %>
+				<% if (prediction.userId == loggedInUser.id) { %> 
+				<tr class="logged-in-user">
+				<% } else { %>
+				<tr>
+				<% } %>
+					<td><%= index+1 %></td>
+					<td><%= users[prediction.userId].teamname %></td>
+					<td><%= users[prediction.userId].name %></td>
+					<% if (teams_info[match.rule1Winner] == teams_info[prediction.rule1Winner]) { %> 
+						<td class="correct-prediction"><%= teams_info[prediction.rule1Winner] %></td>
+					<% } else { %>
+						<td><%= teams_info[prediction.rule1Winner] %></td>
+					<% } %>
+					
+					<% if ((prediction.rule2Winner >= (match.rule2Winner - rule2.range)) && (prediction.rule2Winner <= (parseInt(match.rule2Winner) + parseInt(rule2.range)))) { %>
+						<td class="correct-prediction"><%= prediction.rule2Winner %></td>
+					<% } else { %>
+						<td><%= prediction.rule2Winner %></td>
+					<% } %>
+
+					<% if (match.rule3Winner == prediction.rule3Winner) { %> 
+						<td class="correct-prediction"><%= prediction.rule3Winner %></td>
+					<% } else { %>
+						<td><%= prediction.rule3Winner %></td>
+					<% } %>
+
+					<% if (bonusRule.range) { %>
+						<% if ((prediction.bonusWinner >= (match.bonusWinner - bonusRule.range)) && (prediction.bonusWinner <= (parseInt(match.bonusWinner) + parseInt(bonusRule.range)))) { %> 
+							<td class="correct-prediction"><%= prediction.bonusWinner %></td>
+						<% } else { %>
+							<td><%= prediction.bonusWinner %></td>
+						<% } %>
+					<% } else { %>
+						<% if (match.bonusWinner == prediction.bonusWinner) { %> 
+							<td class="correct-prediction"><%= prediction.bonusWinner %></td>
+						<% } else { %>
+							<td><%= prediction.bonusWinner %></td>
+						<% } %>
+					<% } %>
+
+					<td><%= prediction.points %></td>
+				</tr>
+			<% }); %>
+		<% } else { %>
+		<tr>
+			<td colspan="8" style="text-align: center; font-weight: bold; font-style: italic;">No Predictions Found</td>
+		</tr>
+		<% } %>
+	</tbody>	
+</table>

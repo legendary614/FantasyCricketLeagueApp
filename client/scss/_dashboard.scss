@@ -1,0 +1,117 @@
+.content {
+	.todays-matches, .points-table {
+		border-top: 1px solid #2a2c30;
+	}
+
+	.refresh-table {
+		cursor: pointer;
+		&:hover {
+			color: #939393;
+		}
+	}
+
+	.prediction-rules {
+		.form-control {
+			width: 280px;
+			border: 1px solid #77797c;
+		}
+	}
+
+	.match-container {
+		padding: 0 24px;
+    	border-top: 1px solid #77797c;
+    	margin-bottom: 24px;
+
+    	.section-header {
+    		font-style: italic;
+    		font-weight: bold;
+    		color: #104E8B;
+    	}
+	}
+
+	.match-row, .winner-match-row {
+		border: 1px solid #77797c;
+		padding: 16px;
+		border-radius: 5px;
+		background: #fdfdfd;
+		margin-bottom: 24px;
+		-webkit-box-shadow: 1px 1px 1px 0px rgba(42,60,48,1);
+		-moz-box-shadow: 1px 1px 1px 0px rgba(42,60,48,1);
+		box-shadow: 1px 1px 1px 0px rgba(42,60,48,1);		
+	}
+
+	ul.upcoming-matches-list, ul.recent-matches-list {
+		list-style: none;
+		padding: 0;
+		li.upcoming-match, li.recent-match {
+			font-size: 16px;
+			color: #009dd0;
+		    padding: 12px 0;
+    		border-bottom: 1px solid #939393;
+    		cursor: pointer;
+
+    		.match-time {
+    			font-size: 13px;
+    			color: #2a2c30;
+    			cursor: default;
+    			font-style: italic;
+    			&:hover {
+    				color: #2a2c30;
+    			}
+    		}
+			&:hover {
+				color: #00bce4;
+			}
+		}
+	}
+}
+
+.results-content {
+	.result-heading {
+		.heading-label {
+			@include display-inline-block;
+			padding-right: 24px;
+		}
+		.form-control {
+			@include display-inline-block;
+			width: auto;
+		}
+	}
+
+	.results-table {
+		.winning-predictions {
+			td{
+				font-weight: bold;
+				font-style: italic;
+			}
+		}
+		tr {
+			border-bottom: 1px solid #f3f3f3;
+
+			&:last-child {
+				border-bottom: 0px;
+			}
+			td.correct-prediction {
+				background: #cbfdcb;
+			}			
+		}
+	}
+}
+
+.prediction-note {
+	font-size: 14px;
+	color: green;
+	font-weight: bold;
+}
+
+.prediction-range {
+	color:brown;
+}
+
+.prediction-points {
+	color:blue;
+}
+
+.success-message {
+	display: none;
+}
